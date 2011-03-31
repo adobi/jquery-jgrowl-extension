@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="jquery.jgrowl.css" type="text/css" media="screen" />
+        
+        <style type="text/css">
+            a {
+                color:#fff;
+            }
+            .jg-ext-link {
+                color:#fff;
+                margin-right:5px;
+                font-size:1.2em;
+                font-weight:bold;
+                text-decoration:none;
+                float:right;
+                position:relative;
+                top:-2px;
+            }
+            
+            .jg-item-counter {
+                font-size:2em;
+            }
+        </style>
+        
+        <script type="text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src = "jquery.jgrowl.js"></script>
+        <script type="text/javascript" src = "jquery.cookie.js"></script>
+        <script type="text/javascript" src = "jquery.jgrowl.extension.js"></script>
+    </head>
+    
+    <body>
+        
+        <script type="text/javascript">
+            $(function() {
+                
+                $.jGrowl('<p>Hello W hello hello hello hello hello hello hello</p><p>Hello W hello hello hello hello hello hello hello</p><p>Hello W hello hello hello hello hello hello hello</p><p>Hello W hello hello hello hello hello hello hello</p><p>Hello W hello hello hello hello hello hello hello</p><p>Hello W hello hello hello hello hello hello hello</p><p>Hello W hello hello hello hello hello hello hello</p><p>Hello W hello hello hello hello hello hello hello</p><p>Hello W hello hello hello hello hello hello hello</p><p>Hello W hello hello hello hello hello hello hello</p><p>Hello W hello hello hello hello hello hello hello</p><p>Hello W hello hello hello hello hello hello hello</p>', {
+                    sticky: true,
+                    afterOpen: function() {
+                        $.extendJGrowl();
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
