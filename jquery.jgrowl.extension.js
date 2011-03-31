@@ -23,7 +23,10 @@
                     
                 messageHtml = $('<div/>', {'class': 'jg-inner-message'});
             
-            message.html(messageHtml.html(message.html()));
+            function wrap() {
+                
+                message.html(messageHtml.html(message.html()));
+            }    
             
             function toggleIn() {
                 container.css({
@@ -46,48 +49,59 @@
 
             }
             
-            if ($.cookie('jg')) {
-                if ($.cookie('jg') === 'in') {
+            return {
+                extend: function() {
                     
-                    toggleIn();
+                    wrap();    
                     
-                    container.find('.jGrowl-close').after(templateOut);
+                    if ($.cookie('jg')) {
+                        if ($.cookie('jg') === 'in') {
+                            
+                            toggleIn();
+                            
+                            container.find('.jGrowl-close').after(templateOut);
+                            
+                        } else {
+                            
+                            toggleOut();
+                            
+                            container.find('.jGrowl-close').after(templateIn);
+                            
+                            
+                        }
+                    } else {
+                        container.prepend(templateIn);
+                    }
                     
-                } else {
+                    container.delegate('.jg-ext-link-in', 'click', function() {
+                        
+                        toggleIn();
+                        
+                        $.cookie('jg', 'in', { expires: 70, path: '/'});
+                        
+                        $(this).remove();
+                        
+                        container.find('.jGrowl-close').after(templateOut);
+                        
+                    });
                     
-                    toggleOut();
-                    
-                    container.find('.jGrowl-close').after(templateIn);
-                    
-                    
+                    container.delegate('.jg-ext-link-out', 'click', function() {
+                        
+                        toggleOut();
+                        
+                        $.cookie('jg', 'out', { expires: 70, path: '/'});
+                        
+                        $(this).remove();
+                        
+                        container.find('.jGrowl-close').after(templateIn);
+        
+                    });
+                },
+                refresh: function(elem, selector) {
+                    cl(elem.find(selector).length);
+                    elem.find('.jg-item-counter').html(elem.find(selector).length);
                 }
-            } else {
-                container.prepend(templateIn);
             }
-            
-            container.delegate('.jg-ext-link-in', 'click', function() {
-                
-                toggleIn();
-                
-                $.cookie('jg', 'in', { expires: 70, path: '/'});
-                
-                $(this).remove();
-                
-                container.find('.jGrowl-close').after(templateOut);
-                
-            });
-            
-            container.delegate('.jg-ext-link-out', 'click', function() {
-                
-                toggleOut();
-                
-                $.cookie('jg', 'out', { expires: 70, path: '/'});
-                
-                $(this).remove();
-                
-                container.find('.jGrowl-close').after(templateIn);
-
-            });
         }
     }
     
